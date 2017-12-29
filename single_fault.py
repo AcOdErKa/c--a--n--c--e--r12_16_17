@@ -142,5 +142,6 @@ output_1f["Output Proteins"]=out["Proteins"]
 for i in range(25):
     pathway(i,inpv,pathv,outv)
     output_1f[str(i)]=outv
+    inpv=[0,0,0,0,1]
     
 print(output_1f)
