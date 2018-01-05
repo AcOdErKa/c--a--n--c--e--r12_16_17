@@ -99,7 +99,7 @@ for i in range(32):
 for i in range(32):
     out=list(output_fl.iloc[i,1:])
     if out==[0,0,0,0,0,0,0]:
-        unq=out
+        unq=output_fl.iloc[i,0]
         break
 
 print("1. Check Network\n2. Fault-less DataFrame\n3. Unique Input Vector")
