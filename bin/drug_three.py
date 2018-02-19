@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan 18 21:11:14 2018
-OBJECTIVE: DRUG VECTOR APPLICATION ON SINGLE FAULT
+Created on Thu Feb 15 00:37:02 2018
+OBJECTIVE: DRUG VECTOR APPLICATION ON three FAULTS
 @author: arghanandan
 """
 
@@ -45,36 +45,32 @@ df_drug["Values"]=[0] * len(df_drug.index)
 drugv=list(df_drug["Values"])
 
 #creating output file
-cols=["Drug Vector"] + [i for i in range(25)]
-output_drugone=pd.DataFrame(columns=cols)
+cols=["Drug Vector"]
+for i in range(1,25):
+    for j in range(i+1,25):
+        for k in range(j+1,25):
+            cols=cols+[str(i)+","+str(j)+","+str(k)]
+output_drugthree=pd.DataFrame(columns=cols)
 
-j=0
+m=0
 while True:
-    encoded=[]
-    for i in range(25):
-        drugpath.pathway([i],drugv,inpv,pathv,outv)
-        encoded.append(float(en.encode(outv)))
-        inpv=[0,0,0,0,1]
-    output_drugone.loc[j,"Drug Vector"]=' '.join(map(str,drugv))
-    output_drugone.iloc[j,1:]=encoded
+    output_drugthree.loc[m,"Drug Vector"]=' '.join(map(str,drugv))
+    l=1
+    print("Drug scenario:",drugv,"starts")
+    for i in range(1,25):
+        for j in range(i+1,25):
+            for k in range(j+1,25):
+                drugpath.pathway([i,j,k],drugv,inpv,pathv,outv)
+                inpv=[0,0,0,0,1]
+                output_drugthree.iloc[m,l]=en.encode(outv)
+                print("Drug scenario:",m+1,drugv,"  Fault scenario:",l,"   Fault locations:",[i,j,k])
+                l=l+1
+    print("Drug scenario:",drugv,"ends")
     drugv=cmb.combination(drugv)
     if drugv==False:
         break
-    j=j+1
-
-for i in range(24):
-    pd.to_numeric(output_drugone[i+1])
-
-#print(output_drugone)
-
-#plt.figure()
-#plt.imshow(output_drugone.iloc[:,1:],interpolation='bicubic',cmap='hot')
-#plt.colorbar()
-#plt.xticks(25,[i for i in range(24)])
-#plt.yticks(64,output_drugone.iloc[:,0])
-#plt.show()
-
-#write to output_drugone.csv
-#output_drugone.to_csv("outs/output_drugone.csv")
+    m=m+1
     
+#output_drugthree.to_csv("outs/output_drugthree.csv")
+      
 print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")

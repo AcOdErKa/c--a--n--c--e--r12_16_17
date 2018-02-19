@@ -21,7 +21,7 @@ pd.set_option("display.max_columns",None)
 pd.set_option("display.max_rows",None)
         
 #reading protein file
-df_gene=pd.read_csv("gene.csv",
+df_gene=pd.read_csv("ins/gene.csv",
                 delimiter=",",
                 index_col=0,
                 header=None)
@@ -38,7 +38,7 @@ pathv=list(path["Values"])
 outv=list(out["Values"])
 
 #reading drug file
-df_drug=pd.read_csv("drug.csv",header=None)
+df_drug=pd.read_csv("ins/drug.csv",header=None)
 df_drug.columns=["Drugs"]
 df_drug["Values"]=[0] * len(df_drug.index)
 
@@ -66,6 +66,6 @@ while True:
         break
     k=k+1
     
-#output_drugtwo.to_csv("output_drugtwo.csv")
+output_drugtwo.to_csv("outs/output_drugtwo.csv")
       
 print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")
