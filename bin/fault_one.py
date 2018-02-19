@@ -11,7 +11,7 @@ pd.set_option("display.max_columns",None)
 pd.set_option("display.max_rows",None)
 
 #reading protein file
-df=pd.read_csv("gene.csv",
+df=pd.read_csv("ins/gene.csv",
                 delimiter=",",
                 index_col=0,
                 header=None)
@@ -38,7 +38,7 @@ for i in range(25):
     output_1f[str(i)]=outv
     inpv=[0,0,0,0,1]
     
-print(output_1f)
+#print(output_1f)
 
 #write to .csv file   
-#output_1f.to_csv("output_1f.csv")
+output_1f.to_csv("outs/output_1f.csv")

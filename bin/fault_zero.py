@@ -12,7 +12,7 @@ import pathway_normal as pth
 import combination as cmb
 
 #reading protein file
-df=pd.read_csv("gene.csv",
+df=pd.read_csv("ins/gene.csv",
                 delimiter=",",
                 index_col=0,
                 header=None)
@@ -48,30 +48,26 @@ for i in range(32):
     output_fl.loc[i,"Input"]=' '.join(map(str,inpv))
     if i==0:
         path_fl["Values"]=pathv
+    if outv==[0,0,0,0,0,0,0]:
+        unq=output_fl.loc[i,"Input"]
     output_fl.iloc[i,1:]=outv
     inpv=cmb.combination(inpv)
     if inpv==False:
         break
     
-for i in range(32):
-    out=list(output_fl.iloc[i,1:])
-    if out==[0,0,0,0,0,0,0]:
-        unq=output_fl.loc[i,"Input"]
-        break
-
-print("1. Check Network\n2. Fault-less DataFrame\n3. Unique Input Vector")
-n=int(input("Enter choice: "))
-
-if n==1:
-    print("Input vector: [0,0,0,0,0]\n")
-    print(path_fl)
-elif n==2:
-    print(output_fl)
-elif n==3:
-    print("Unique input vector: " + str(unq))
+#print("1. Check Network\n2. Fault-less DataFrame\n3. Unique Input Vector")
+#n=int(input("Enter choice: "))
+#
+#if n==1:
+#    print("Input vector: [0,0,0,0,0]\n")
+#    print(path_fl)
+#elif n==2:
+#    print(output_fl)
+#elif n==3:
+#    print("Unique input vector: " + str(unq))
 
 def getUnq():
     return unq
 
 #write to .csv file   
-#output_fl.to_csv("output_fl.csv")
+output_fl.to_csv("outs/output_fl.csv")

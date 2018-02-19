@@ -6,10 +6,10 @@ OBJECTIVE: DRUG VECTOR APPLICATION ON SINGLE FAULT
 @author: arghanandan
 """
 
-import fns.pathway_drugged as drugpath
+import pathway_drugged as drugpath
 import pandas as pd
-import fns.combination as cmb
-import fns.encoder as en
+import combination as cmb
+import encoder as en
 import matplotlib.pyplot as plt
 import time
 
@@ -75,6 +75,6 @@ for i in range(24):
 #plt.show()
 
 #write to output_drugone.csv
-#output_drugone.to_csv("outs/output_drugone.csv")
+output_drugone.to_csv("outs/output_drugone.csv")
     
 print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")

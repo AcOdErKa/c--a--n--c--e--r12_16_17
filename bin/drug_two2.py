@@ -17,7 +17,7 @@ from pycuda import driver, compiler, gpuarray, tools
 import pycuda.autoinit
 
 kernel="""
-__global__ void encode(int *outv,int *env)
+__global__ void encode(int *outv,float *env)
 {
     int tx=threadIdx.x;
     
@@ -31,7 +31,7 @@ __global__ void encode(int *outv,int *env)
         else
             s+=outv[p+i];
     }
-    env[tx]=(5*(f*s)) + (5*(f+s));
+    env[tx]=(0.5*(f*s)) + (0.5*(f+s));
 }
 """
 start_time=time.clock()
@@ -86,27 +86,29 @@ while True:
     i=i+1    
 
 #drugv matrix for parallelised input
-drugv=df_drug.as_matrix()
+drugv=(df_drug.as_matrix()).astype(np.int32)
 
 outsize=7
 thlen=276
 kernel=kernel % {"outsize":outsize}
 mod=compiler.SourceModule(kernel)
 results=mod.get_function("encode")
-i=0
 for i  in range(len(drugv)):
-    j=0
+    print "Drug vector:",i+1,drugv[i],"started."
     for j in range(len(faultv)):
         outlist=[0,0,0,0,0,0,0]
         drugpath.pathway(faultv[j],drugv[i],inpv,pathv,outlist)
         outv[j]=outlist
         inpv=[0,0,0,0,1]
     outv_gpu=gpuarray.to_gpu((np.array(outv)).astype(np.int32))
-    env_gpu=gpuarray.empty((276),np.int32)
+    env_gpu=gpuarray.empty((thlen),np.float32)
     results(outv_gpu,env_gpu,block=(thlen,1,1))
     output_drugtwo.loc[i]=" ".join(map(str,drugv[i]))
     output_drugtwo.iloc[i,1:]=env_gpu.get()
+    print "Drug vector:",i+1,drugv[i],"end."
 
-output_drugtwo.to_csv("outs/output_drugtwo2.csv")
+ofile="outs/output_drugtwo_p.csv"
+output_drugtwo.to_csv(ofile)
+print "Output written to",ofile
       
-print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")
+print "Execution time: ","%0.3f"%(time.clock()-start_time),"seconds"

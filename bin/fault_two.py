@@ -12,7 +12,7 @@ pd.set_option("display.max_columns",None)
 pd.set_option("display.max_rows",None)
 
 #reading protein file
-df=pd.read_csv("gene.csv",
+df=pd.read_csv("ins/gene.csv",
                 delimiter=",",
                 index_col=0,
                 header=None)
@@ -48,4 +48,4 @@ for i in range(1,25):
 print(output_2f)
 
 #write to .csv file   
-#output_2f.to_csv("output_2f.csv")
+output_2f.to_csv("outs/output_2f.csv")
