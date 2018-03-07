@@ -49,25 +49,16 @@ for i in range(32):
     if i==0:
         path_fl["Values"]=pathv
     if outv==[0,0,0,0,0,0,0]:
-        unq=output_fl.loc[i,"Input"]
+        unq=list(map(int,(output_fl.loc[i,"Input"]).split(" ")))
     output_fl.iloc[i,1:]=outv
     inpv=cmb.combination(inpv)
     if inpv==False:
         break
     
-#print("1. Check Network\n2. Fault-less DataFrame\n3. Unique Input Vector")
-#n=int(input("Enter choice: "))
-#
-#if n==1:
-#    print("Input vector: [0,0,0,0,0]\n")
-#    print(path_fl)
-#elif n==2:
-#    print(output_fl)
-#elif n==3:
-#    print("Unique input vector: " + str(unq))
-
-def getUnq():
-    return unq
-
 #write to .csv file   
 output_fl.to_csv("outs/output_fl.csv")
+
+#write unique_input_vector to file
+f=open("outs/output_unq.txt","w")
+f.write(" ".join(map(str,unq)))
+f.close()

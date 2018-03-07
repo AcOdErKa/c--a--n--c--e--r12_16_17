@@ -33,7 +33,10 @@ out=pd.DataFrame(df_gene.iloc[28:,:]).reset_index()
 path=pd.DataFrame(df_gene.iloc[5:28,:]).reset_index()
 
 #input,pathway and output vectors
-inpv=[0,0,0,0,1]
+f=open("outs/output_unq.txt","r")
+unq=f.readline()
+unq=unq.split(" ")
+inpv=list(map(int,unq))
 pathv=list(path["Values"])
 outv=list(out["Values"])
 
@@ -62,19 +65,7 @@ while True:
         break
     j=j+1
 
-for i in range(24):
-    pd.to_numeric(output_drugone[i+1])
-
-#print(output_drugone)
-
-#plt.figure()
-#plt.imshow(output_drugone.iloc[:,1:],interpolation='bicubic',cmap='hot')
-#plt.colorbar()
-#plt.xticks(25,[i for i in range(24)])
-#plt.yticks(64,output_drugone.iloc[:,0])
-#plt.show()
-
 #write to output_drugone.csv
-output_drugone.to_csv("outs/output_drugone.csv")
+output_drugone.to_csv("outs/output_drugone2.csv")
     
 print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")

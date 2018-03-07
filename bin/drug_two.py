@@ -33,7 +33,10 @@ out=pd.DataFrame(df_gene.iloc[28:,:]).reset_index()
 path=pd.DataFrame(df_gene.iloc[5:28,:]).reset_index()
 
 #input,pathway and output vectors
-inpv=[0,0,0,0,1]
+f=open("outs/output_unq.txt","r")
+unq=f.readline()
+unq=unq.split(" ")
+inpv=list(map(int,unq))
 pathv=list(path["Values"])
 outv=list(out["Values"])
 

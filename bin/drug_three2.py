@@ -69,7 +69,10 @@ output_drugthree=pd.DataFrame(columns=cols)
 df_drug=pd.DataFrame(columns=df_drug.iloc[:,0])
 
 #input,pathway and output vectors
-inpv=[0,0,0,0,1]
+f=open("outs/output_unq.txt","r")
+unq=f.readline()
+unq=unq.split(" ")
+inpv=list(map(int,unq))
 pathv=[0]*len(path)
 outv=[[0]*len(out)]* len(faultv)
 env=[0] * len(faultv)
