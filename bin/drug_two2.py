@@ -58,7 +58,10 @@ out=pd.DataFrame(df_gene.iloc[28:,:]).reset_index()
 path=pd.DataFrame(df_gene.iloc[5:28,:]).reset_index()
 
 #input,pathway,output,encoded matrix for parallelised input
-inpv=[0,0,0,0,1]
+f=open("outs/output_unq.txt","r")
+unq=f.readline()
+unq=unq.split(" ")
+inpv=list(map(int,unq))
 pathv=[0] * len(path)
 outv=[[0]*len(out)]*276
 env=[0] * 276
