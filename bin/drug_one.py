@@ -66,6 +66,6 @@ while True:
     j=j+1
 
 #write to output_drugone.csv
-output_drugone.to_csv("outs/output_drugone2.csv")
+output_drugone.to_csv("outs/output_drugone.csv")
     
 print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")

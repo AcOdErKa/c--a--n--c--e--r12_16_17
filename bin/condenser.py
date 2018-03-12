@@ -6,10 +6,15 @@ OBJECTIVE: CALCULATE CONDENSED ENCODED WEIGHTS FOR ALL FAULT SCENARIOS PER DRUG
 @author: arghanandan
 """
 
-def condense(converted,convert):
+def condense(converted,convert,case):
     df_con=converted
     df=convert
-    max=88
+    if case==1:
+        max=88
+    elif case==2:
+        max=1679.5
+    elif case==3:
+        max=152655
     col_df=len(df.columns[1:])
     len_df=len(df.index)
     for i in range(len_df):

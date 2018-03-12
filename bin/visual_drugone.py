@@ -19,21 +19,21 @@ col_df=len(df_drugone.columns[1:])
 len_df=len(df_drugone.index)
 
 #imageshow: drug vector v fault locations
-#plt.figure()
-#plt.title("DRUG VECTORS V FAULT LOCATIONS\n" + ifile)
-#plt.imshow(df_drugone.iloc[:,1:],interpolation="sinc",cmap=plt.cm.RdYlGn_r)
-#plt.axis("tight")
-#plt.xticks([i for i in range(col_df)],df_drugone.columns[1:])
-#plt.xlabel("Fault Location")
-#plt.yticks([i for i in range(len_df)],df_drugone.iloc[:,0])
-#plt.ylabel("Drug Vector")
-#plt.colorbar()
-#plt.show()
+plt.figure()
+plt.title("DRUG VECTORS V FAULT LOCATIONS\n" + ifile)
+plt.imshow(df_drugone.iloc[:,1:],interpolation="sinc",cmap=plt.cm.RdYlGn_r)
+plt.axis("tight")
+plt.xticks([i for i in range(col_df)],df_drugone.columns[1:])
+plt.xlabel("Fault Location")
+plt.yticks([i for i in range(len_df)],df_drugone.iloc[:,0])
+plt.ylabel("Drug Vector")
+plt.colorbar()
+plt.show()
 
 #condensed dataframe to store encoded weights
 df_con=pd.DataFrame(columns=["drug vector","condensed weight"])
 df_con.iloc[:,0]=df_drugone.iloc[:,0]
-df_con=cond.condense(df_con,df_drugone)
+df_con=cond.condense(df_con,df_drugone,1)
 ofile="outs/output_one_weight.csv"
 df_con.to_csv(ofile)
 df_con=pd.read_csv(ofile,index_col=0)
