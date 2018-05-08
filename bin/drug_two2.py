@@ -97,7 +97,7 @@ kernel=kernel % {"outsize":outsize}
 mod=compiler.SourceModule(kernel)
 results=mod.get_function("encode")
 for i  in range(len(drugv)):
-    print "Drug vector:",i+1,drugv[i],"started."
+##    print "Drug vector:",i+1,drugv[i],"started."
     for j in range(len(faultv)):
         outlist=[0,0,0,0,0,0,0]
         drugpath.pathway(faultv[j],drugv[i],inpv,pathv,outlist)
@@ -108,7 +108,7 @@ for i  in range(len(drugv)):
     results(outv_gpu,env_gpu,block=(thlen,1,1))
     output_drugtwo.loc[i]=" ".join(map(str,drugv[i]))
     output_drugtwo.iloc[i,1:]=env_gpu.get()
-    print "Drug vector:",i+1,drugv[i],"end."
+##    print "Drug vector:",i+1,drugv[i],"end."
 
 ofile="outs/output_drugtwo_p.csv"
 output_drugtwo.to_csv(ofile)

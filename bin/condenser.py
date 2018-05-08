@@ -6,22 +6,18 @@ OBJECTIVE: CALCULATE CONDENSED ENCODED WEIGHTS FOR ALL FAULT SCENARIOS PER DRUG
 @author: arghanandan
 """
 
-def condense(converted,convert,case):
-    df_con=converted
+import pandas as pd
+
+def condense(convert,case=0):
+    df_con=pd.DataFrame(columns=["drug vector","condensed weight"])
     df=convert
-    if case==1:
-        max=88
-    elif case==2:
-        max=1679.5
-    elif case==3:
-        max=152655
-    col_df=len(df.columns[1:])
+    base=df.iloc[0,1:]
+    max=base.sum()
     len_df=len(df.index)
     for i in range(len_df):
-        weight=0
-        for j in range(col_df):
-            weight=weight+df.iloc[i,j+1]
-        df_con.iloc[i,1]=weight
+        df_con.loc[i,"drug vector"]=df.iloc[i,0]
+        temp=base-df.iloc[i,1:]
+        df_con.iloc[i,1]=temp.sum()
 #    print(df_con)
     df_con.iloc[:,1]=(df_con.iloc[:,1]/max)*100
     return df_con

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Feb 18 20:40:02 2018
-OBJECTIVE: DRUG VECTOR APPLICATION ON THREE FAULTS USING PARALLELISATION
+Created on Fri Apr 6 14:02:09 2018
+DRUG VECTOR APPLICATION ON FOUR FAULTS USING PARALLELISATION
 @author: arghanandan
 """
 
@@ -60,11 +60,13 @@ path=pd.DataFrame(df_gene.iloc[5:28,:]).reset_index()
 #creating output and fault file
 faultv=[]
 cols=["drug vector"]
-for i in range(1,25):
-    for j in range(i+1,25):
-        for k in range(j+1,25):
-            cols=cols+[str(i)+","+str(j)+","+str(k)]
-            faultv.append([i,j,k])
+nodes=25
+for i in range(1,nodes):
+    for j in range(i+1,nodes):
+        for k in range(j+1,nodes):
+            for l in range(k+1,nodes):
+                cols=cols+[str(i)+","+str(j)+","+str(k)+","+str(l)]
+                faultv.append([i,j,k,l])
 output_drugthree=pd.DataFrame(columns=cols)
 df_drug=pd.DataFrame(columns=df_drug.iloc[:,0])
 
