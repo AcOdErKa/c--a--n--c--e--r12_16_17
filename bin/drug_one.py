@@ -13,8 +13,6 @@ import encoder as en
 import matplotlib.pyplot as plt
 import time
 
-start_time=time.clock()
-
 #common settings
 plt.style.use("ggplot")
 pd.set_option("display.max_columns",None)
@@ -52,6 +50,7 @@ cols=["Drug Vector"] + [i for i in range(25)]
 output_drugone=pd.DataFrame(columns=cols)
 
 j=0
+start_time=time.clock()
 while True:
     encoded=[]
     for i in range(25):
@@ -65,7 +64,7 @@ while True:
         break
     j=j+1
 
+print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")
+
 #write to output_drugone.csv
 output_drugone.to_csv("outs/output_drugone.csv")
-    
-print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")

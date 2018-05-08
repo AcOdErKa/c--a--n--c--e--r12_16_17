@@ -6,14 +6,12 @@ OBJECTIVE: DRUG VECTOR APPLICATION ON three FAULTS
 @author: arghanandan
 """
 
-import fns.pathway_drugged as drugpath
+import pathway_drugged as drugpath
 import pandas as pd
-import fns.combination as cmb
-import fns.encoder as en
+import combination as cmb
+import encoder as en
 import matplotlib.pyplot as plt
 import time
-
-start_time=time.clock()
 
 #common settings
 plt.style.use("ggplot")
@@ -56,24 +54,25 @@ for i in range(1,25):
 output_drugthree=pd.DataFrame(columns=cols)
 
 m=0
+start_time=time.clock()
 while True:
     output_drugthree.loc[m,"Drug Vector"]=' '.join(map(str,drugv))
     l=1
-    print("Drug scenario:",drugv,"starts")
+#    print("Drug scenario:",drugv,"starts")
     for i in range(1,25):
         for j in range(i+1,25):
             for k in range(j+1,25):
                 drugpath.pathway([i,j,k],drugv,inpv,pathv,outv)
                 inpv=[0,0,0,0,1]
                 output_drugthree.iloc[m,l]=en.encode(outv)
-                print("Drug scenario:",m+1,drugv,"  Fault scenario:",l,"   Fault locations:",[i,j,k])
+#                print("Drug scenario:",m+1,drugv,"  Fault scenario:",l,"   Fault locations:",[i,j,k])
                 l=l+1
-    print("Drug scenario:",drugv,"ends")
+#    print("Drug scenario:",drugv,"ends")
     drugv=cmb.combination(drugv)
     if drugv==False:
         break
     m=m+1
+
+print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")
     
 #output_drugthree.to_csv("outs/output_drugthree.csv")
-      
-print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")
