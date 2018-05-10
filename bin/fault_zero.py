@@ -57,6 +57,9 @@ for i in range(32):
     
 #write to .csv file   
 output_fl.to_csv("outs/output_fl.csv")
+print(output_fl)
+print("rows: ",len(output_fl.index),"\tcolumns: ",len(output_fl.columns))
+print("Unique input vector: ",unq)
 
 #write unique_input_vector to file
 f=open("outs/output_unq.txt","w")

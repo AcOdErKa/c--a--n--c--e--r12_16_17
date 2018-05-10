@@ -68,3 +68,5 @@ print("Execution time: ","%0.3f"%(time.clock()-start_time)," seconds")
 
 #write to output_drugone.csv
 output_drugone.to_csv("outs/output_drugone.csv")
+print(output_drugone)
+print("rows: ",len(output_drugone.index),"\tcolumns: ",len(output_drugone.columns))

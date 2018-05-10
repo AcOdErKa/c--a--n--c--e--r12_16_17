@@ -41,7 +41,8 @@ for i in range(25):
     output_1f[str(i)]=outv
     inpv=[0,0,0,0,1]
     
-#print(output_1f)
+print(output_1f)
+print("rows: ",len(output_1f.index),"\tcolumns: ",len(output_1f.columns))
 
 #write to .csv file   
 output_1f.to_csv("outs/output_1f.csv")

@@ -48,7 +48,8 @@ for i in range(1,25):
             output_2f[str(i)+","+str(j)]=outv
             inpv=[0,0,0,0,1]
             
-#print(output_2f)
+print(output_2f.head())
+print("rows: ",len(output_2f.index),"\tcolumns: ",len(output_2f.columns))
 
 #write to .csv file   
 output_2f.to_csv("outs/output_2f.csv")
